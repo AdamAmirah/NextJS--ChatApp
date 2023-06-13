@@ -1,0 +1,41 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc",
+    "dev": "nodemon src/index.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@apollo/server": "^4.7.1",
+    "@graphql-tools/schema": "^9.0.19",
+    "@prisma/client": "^4.14.1",
+    "axios": "^1.4.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "graphql": "^16.6.0",
+    "graphql-subscriptions": "^2.0.0",
+    "graphql-tools": "^8.3.20",
+    "graphql-ws": "^5.13.1",
+    "isomorphic-fetch": "^3.0.0",
+    "lodash": "^4.17.21",
+    "next-auth": "^4.22.1",
+    "node-fetch": "^3.3.1",
+    "ts-node": "^10.9.1",
+    "ws": "^8.13.0"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.13",
+    "@types/isomorphic-fetch": "^0.0.36",
+    "@types/lodash": "^4.14.194",
+    "@types/node": "^20.2.4",
+    "@types/ws": "^8.5.4",
+    "nodemon": "^2.0.22",
+    "prisma": "^4.14.1",
+    "typescript": "^5.0.4"
+  }
+}
