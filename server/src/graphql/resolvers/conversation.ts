@@ -9,6 +9,7 @@ import {
 import { GraphQLError } from "graphql";
 import { PubSub, withFilter } from "graphql-subscriptions";
 import { userIsConversationParticipant } from "../../util/functions";
+import { isEqual } from "lodash";
 
 const resolvers = {
   Query: {
@@ -68,7 +69,7 @@ const resolvers = {
       } = session;
 
       try {
-        const existingConversation = await prisma.conversation.findFirst({
+        const existingConversation = await prisma.conversation.findMany({
           where: {
             participants: {
               every: {
@@ -80,10 +81,16 @@ const resolvers = {
           },
           include: conversationPopulated,
         });
+        existingConversation.forEach((ec) => {
+          const list = [];
+          ec.participants.forEach((p) => {
+            list.push(p.userId);
+          });
 
-        if (existingConversation) {
-          throw new GraphQLError("Conversation Already exists");
-        }
+          if (isEqual(list.sort(), participantIds.sort())) {
+            throw new GraphQLError("Conversation Already exists");
+          }
+        });
 
         const conversation = await prisma.conversation.create({
           data: {

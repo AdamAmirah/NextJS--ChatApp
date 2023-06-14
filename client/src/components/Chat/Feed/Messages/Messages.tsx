@@ -34,8 +34,8 @@ const Messages: React.FC<IMessagesProps> = ({
     // onCompleted() {},  // we can use that later //TODO
   });
 
-  const subscribeToNewMessage = (conversationId: string) => {
-    subscribeToMore({
+  useEffect(() => {
+    let unsubscribe = subscribeToMore({
       document: MessageOperation.Subscriptions.messageSent,
       variables: { conversationId },
       updateQuery: (
@@ -54,10 +54,7 @@ const Messages: React.FC<IMessagesProps> = ({
         });
       },
     });
-  };
-
-  useEffect(() => {
-    subscribeToNewMessage(conversationId);
+    return () => unsubscribe();
   }, [conversationId]);
 
   if (error) {

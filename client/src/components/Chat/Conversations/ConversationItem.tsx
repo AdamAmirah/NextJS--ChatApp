@@ -80,7 +80,6 @@ const ConversationItem: React.FC<ConversationItemProps> = ({
     findSenderImage();
   }, []);
 
-  console.log(conversation);
   return (
     <Stack
       direction="row"

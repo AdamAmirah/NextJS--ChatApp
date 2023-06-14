@@ -210,6 +210,7 @@ const ConversationWrapper: React.FC<ConversationWrapperProps> = ({
   const secondary = useColorModeValue("brand.100", "purple.50");
   const fontColor = useColorModeValue("purple.100", "brand.50");
   const borderColor = useColorModeValue("brand.50", "purple.50");
+
   return (
     <Box
       borderRadius="3xl"

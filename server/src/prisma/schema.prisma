@@ -86,7 +86,7 @@ model ConversationParticipant {
 // message can have one User
 model Message {
     id             String        @id @default(auto()) @map("_id") @db.ObjectId
-    converstaion   Conversation  @relation(fields: [conversationId], references: [id])
+    conversation   Conversation  @relation(fields: [conversationId], references: [id])
     conversationId String        @db.ObjectId
     isLatestIn     Conversation? @relation(name: "latestMessage")
     sender         User          @relation(fields: [senderId], references: [id])

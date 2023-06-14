@@ -79,9 +79,7 @@ const resolvers = {
       if (!session?.user) {
         throw new GraphQLError("Not Authorized");
       }
-      const {
-        user: { id: userId },
-      } = session;
+      const { id: userId } = session.user;
       if (session?.user?.id !== senderId) {
         throw new GraphQLError("Not Authorized");
       }
@@ -111,8 +109,8 @@ const resolvers = {
           throw new GraphQLError("No participant found");
         }
 
-        /// update the conversation table with the new message added
-
+        // Update conversation entity to reflect the changes of latest message in conversation
+        // Update hasSeenLatestMessage to reflect UI of a sender
         const conversation = await prisma.conversation.update({
           where: {
             id: conversationId,
@@ -122,7 +120,7 @@ const resolvers = {
             participants: {
               update: {
                 where: {
-                  id: participant.id,
+                  id: participant?.id,
                 },
                 data: {
                   hasSeenLatestMessage: true,
@@ -131,8 +129,9 @@ const resolvers = {
               updateMany: {
                 where: {
                   NOT: {
-                    userId: senderId,
+                    userId,
                   },
+                  conversationId, // updates participants on that conversation, otherwise breaks the code
                 },
                 data: {
                   hasSeenLatestMessage: false,
