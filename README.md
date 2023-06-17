@@ -6,16 +6,6 @@
 ## Live Demo
 https://next-js-chat-app-ruddy.vercel.app/
 
-
-
-## Screenshots
-<img src="screenshots/img-2.png" style="max-width: 100px; width: 100%; height: auto;">
-<img src="screenshots/img-1.png" style="max-width: 100px; width: 100%; height: auto;">
-<img src="screenshots/img-3.png" style="max-width: 100px; width: 100%; height: auto;">
-<img src="screenshots/img-4.png" style="max-width: 100px; width: 100%; height: auto;">
-<img src="screenshots/img-10.png" style="max-width: 100px; width: 100%; height: auto;">
-
-
 ## Installation
 
 ```
@@ -32,3 +22,13 @@ https://next-js-chat-app-ruddy.vercel.app/
   docker-compose up
 
 ```
+
+
+## Screenshots
+<img src="screenshots/img-2.png" style="max-width: 100px; width: 100%; height: auto;">
+<img src="screenshots/img-1.png" style="max-width: 100px; width: 100%; height: auto;">
+<img src="screenshots/img-3.png" style="max-width: 100px; width: 100%; height: auto;">
+<img src="screenshots/img-4.png" style="max-width: 100px; width: 100%; height: auto;">
+<img src="screenshots/img-10.png" style="max-width: 100px; width: 100%; height: auto;">
+
+
