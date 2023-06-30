@@ -5,7 +5,6 @@ import {
   participantPopulated,
 } from "../graphql/resolvers/conversation";
 import { Context } from "graphql-ws";
-import { IncomingMessage } from "http";
 import { PubSub } from "graphql-subscriptions";
 import { messagePopulated } from "../graphql/resolvers/message";
 /**

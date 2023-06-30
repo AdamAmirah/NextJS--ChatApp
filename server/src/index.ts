@@ -16,7 +16,7 @@ import typeDefs from "./graphql/typeDefs";
 import resolvers from "./graphql/resolvers";
 import * as dotenv from "dotenv";
 import { GraphQLContext, Session, SubscriptionContext } from "./util/types";
-import { getServerSession, verifyJwt } from "./util/functions";
+import { verifyJwt } from "./util/functions";
 import { PrismaClient } from "@prisma/client";
 import { PubSub } from "graphql-subscriptions";
 
@@ -93,6 +93,7 @@ async function main(typeDefs, resolvers) {
     expressMiddleware(server, {
       context: async ({ req }): Promise<GraphQLContext> => {
         const session = verifyJwt(req.headers.authorization.split(" ")[1]);
+        //console.log(session);
         return { session: session as Session, prisma, pubsub };
       },
     })

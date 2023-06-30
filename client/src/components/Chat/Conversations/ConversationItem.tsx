@@ -13,7 +13,7 @@ import {
 import { formatRelative } from "date-fns";
 import enUS from "date-fns/locale/en-US";
 
-import { GoPrimitiveDot } from "react-icons/go";
+import { TbCircleDotFilled } from "react-icons/tb";
 import { MdDeleteOutline } from "react-icons/md";
 import { BiLogOut } from "react-icons/bi";
 import { AiOutlineEdit } from "react-icons/ai";
@@ -115,7 +115,7 @@ const ConversationItem: React.FC<ConversationItemProps> = ({
       </Menu>
       <Flex position="absolute" left="-6px">
         {hasSeenLatestMessage === false && (
-          <GoPrimitiveDot fontSize={18} color="#6B46C1" />
+          <TbCircleDotFilled fontSize={18} color="#6B46C1" />
         )}
       </Flex>
       <Avatar src={senderImage} />

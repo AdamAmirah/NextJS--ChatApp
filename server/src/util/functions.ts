@@ -12,6 +12,7 @@ export function userIsConversationParticipant(
 export const verifyJwt = (token: string) => {
   try {
     const decoded = jwt.verify(token, process.env.SECRET_KEY);
+    //(token);
     return decoded as JwtPayload;
   } catch (error) {
     console.log(error);
