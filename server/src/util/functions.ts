@@ -1,18 +1,6 @@
 import axios from "axios";
 import { ParticipantPopulated } from "./types";
-
-export const getServerSession = async (cookie: string) => {
-  try {
-    const response = await axios.get("http://client:3000/api/auth/session", {
-      headers: { cookie: cookie },
-    });
-    const session = response.data;
-    return session;
-  } catch (err) {
-    console.error(err);
-    return null;
-  }
-};
+import jwt, { JwtPayload } from "jsonwebtoken";
 
 export function userIsConversationParticipant(
   participants: Array<ParticipantPopulated>,
@@ -20,3 +8,13 @@ export function userIsConversationParticipant(
 ): boolean {
   return !!participants.find((participant) => participant.userId === userId);
 }
+
+export const verifyJwt = (token: string) => {
+  try {
+    const decoded = jwt.verify(token, process.env.SECRET_KEY);
+    return decoded as JwtPayload;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+};

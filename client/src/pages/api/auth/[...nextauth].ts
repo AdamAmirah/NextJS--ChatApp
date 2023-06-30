@@ -2,6 +2,7 @@ import NextAuth from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import { PrismaClient } from "@prisma/client";
+import { signJwtAccessToken } from "@/util/jwt";
 
 const prisma = new PrismaClient();
 
@@ -16,7 +17,15 @@ export default NextAuth({
   secret: process.env.NEXTAUTH_SECRET,
   callbacks: {
     async session({ session, token, user }) {
-      return { ...session, user: { ...session.user, ...user } };
+      const accessToken = signJwtAccessToken({
+        ...session,
+        user: { ...session.user, ...user },
+      });
+      return {
+        ...session,
+        accessToken: accessToken,
+        user: { ...session.user, ...user },
+      };
     },
   },
 });

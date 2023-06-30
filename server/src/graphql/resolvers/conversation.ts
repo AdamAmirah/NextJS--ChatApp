@@ -18,10 +18,9 @@ const resolvers = {
       args: any,
       context: GraphQLContext
     ): Promise<Array<ConversationPopulated>> => {
-      const { session, prisma, pubsub } = context;
-      if (!session?.user) {
-        throw new GraphQLError("Not Authorized");
-      }
+      const { prisma, session } = context;
+
+      if (!session?.user) throw new Error("Not Authorized");
 
       const {
         user: { id: userId },
@@ -29,27 +28,17 @@ const resolvers = {
 
       try {
         const conversations = await prisma.conversation.findMany({
-          where: {
-            participants: {
-              some: {
-                userId: {
-                  equals: userId,
-                },
-              },
-            },
-          },
           include: conversationPopulated,
         });
 
-        if (!conversations) {
-          throw new GraphQLError("No conversations");
-        }
-
-        return conversations;
-        //return conversations.filter(conversation => !!conversation.participants.find(p => p.userId === userId));
+        // getting conversations which the user is part of
+        return conversations.filter(
+          (conversation) =>
+            !!conversation.participants.find((p) => p.userId === userId)
+        );
       } catch (error: any) {
-        console.log(error);
-        throw new GraphQLError(error?.message);
+        console.log("conversations error: ", error);
+        throw new Error(error?.message);
       }
     },
   },

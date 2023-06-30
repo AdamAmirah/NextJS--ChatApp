@@ -3,6 +3,7 @@ import { GraphQLWsLink } from "@apollo/client/link/subscriptions";
 import { getMainDefinition } from "@apollo/client/utilities";
 import { createClient } from "graphql-ws";
 import { getSession } from "next-auth/react";
+import { setContext } from "@apollo/client/link/context";
 
 const wsLink =
   typeof window !== "undefined"
@@ -21,6 +22,17 @@ const httpLink = new HttpLink({
   credentials: "include",
 });
 
+const authLink = setContext(async (_, { headers }) => {
+  const session = await getSession();
+  const token = session?.accessToken;
+  return {
+    headers: {
+      ...headers,
+      authorization: token ? `Bearer ${token}` : "",
+    },
+  };
+});
+
 const link =
   typeof window !== "undefined" && wsLink != null
     ? split(
@@ -32,7 +44,7 @@ const link =
           );
         },
         wsLink,
-        httpLink
+        authLink.concat(httpLink)
       )
     : httpLink;
 
