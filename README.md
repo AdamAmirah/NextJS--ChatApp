@@ -4,7 +4,7 @@
 
 
 ## Live Demo
-https://next-js-chat-app-ruddy.vercel.app/
+https://imessageamirah.vercel.app/
 
 ## Installation
 
